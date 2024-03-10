@@ -1,24 +1,26 @@
 //Example fetch using DnD5eAPI - place subclasses in ul
-document.querySelector('button').addEventListener('click', getFetch)
+document.querySelector("button").addEventListener("click", getFetch);
 
-function getFetch(){
-  const choice = document.querySelector('input').value
-  const url = `https://www.dnd5eapi.co/api/spells/${choice}`
-
+function getFetch() {
+  const choice = document.querySelector("input").value;
+  const url = `https://www.dnd5eapi.co/api/spells/${choice}`;
+  document.querySelector('h2').innerText = choice;
   fetch(url)
-      .then(res => res.json()) // parse response as JSON
-      .then(data => {
-       console.log(data.subclasses);
-       data.subclasses.forEach(obj => {
-        const li = document.createElement('li')
+    .then((res) => res.json()) // parse response as JSON
+    .then((data) => {
+      console.log(data.subclasses);
+      data.subclasses.forEach((obj) => {
+        const li = document.createElement("li");
         li.textContent = obj.name;
-        document.querySelector('ul').appendChild(li)
-        })
-        data.classes.forEach(x => console.log(x))
-
-      })
-      .catch(err => {
-          console.log(`error ${err}`)
+        document.querySelector("ul").appendChild(li);
       });
+      data.classes.forEach((x) => {
+        const classLi = document.createElement("li");
+        classLi.textContent = x.name;
+        document.querySelector("ol.banana").appendChild(classLi);
+      });
+    })
+    .catch((err) => {
+      console.log(`error ${err}`);
+    });
 }
-
